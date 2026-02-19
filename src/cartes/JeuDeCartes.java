@@ -1,5 +1,7 @@
 package cartes;
 
+import java.util.Iterator;
+
 public class JeuDeCartes {
 	private Configuration[] typesDeCartes = {
 			new Configuration(new Borne(25), 10),
@@ -35,6 +37,19 @@ public class JeuDeCartes {
 			out.append("\n");
 		}
 		return out.toString();
+	}
+	
+	public Carte[] donnerCartes() {
+		Carte[] cartes = new Carte[106];
+		int carteIndex = 0;
+		
+		for (Configuration configuration : typesDeCartes) {
+			for (int i = 0; i < configuration.getNbExemplaires(); i++) {
+				cartes[carteIndex++] = configuration.getCarte();
+			}
+		}
+		
+		return cartes;
 	}
 	
 	private static class Configuration {

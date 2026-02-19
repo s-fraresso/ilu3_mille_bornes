@@ -30,9 +30,11 @@ public class JeuDeCartes {
 	};
 	
 	public String affichageJeuDeCartes() {
-		StringBuilder out = new StringBuilder("JEU:\n");
+		StringBuilder out = new StringBuilder();
+		
 		for (Configuration configuration : typesDeCartes) {
 			out.append(configuration.getNbExemplaires());
+			out.append(" ");
 			out.append(configuration.getCarte().toString());
 			out.append("\n");
 		}

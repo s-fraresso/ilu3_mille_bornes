@@ -6,4 +6,9 @@ public class Attaque extends Bataille {
 		super(type);
 	}
 
+	@Override
+	public String toString() {
+		return getType().getTexteAttaque();
+	}
+
 }

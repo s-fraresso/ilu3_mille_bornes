@@ -74,6 +74,30 @@ public class GestionCartes {
 		return listeRassemblee;
 	}
 	
+	public static <T> boolean verifierRassemblement(List<T> liste) {
+		if (liste.isEmpty()) {
+			return true;
+		}
+		
+		T elementCourant = liste.get(0);
+		
+		for (ListIterator<T> iter1 = liste.listIterator(); iter1.hasNext();) {
+			T elementSuivant = iter1.next();
+			
+			if (!elementSuivant.equals(elementCourant)) {
+				for (ListIterator<T> iter2 = liste.listIterator(iter1.nextIndex()); iter2.hasNext();) {
+					if (iter2.next().equals(elementCourant)){
+						return false;
+					}
+				}
+				
+				elementCourant = elementSuivant;
+			}
+		}
+		
+		return true;
+	}
+	
 	
 	
 	

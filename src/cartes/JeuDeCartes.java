@@ -56,19 +56,24 @@ public class JeuDeCartes {
 		Carte[] cartes = donnerCartes();
 		
 		for (Configuration configuration : typesDeCartes) {
-			int nbTrouvees = 0;
-			for (int i = 0; i < cartes.length; i++) {
-				if (cartes[i].equals(configuration.getCarte())) {
-					nbTrouvees++;
-				}
-			}
-			
-			if (nbTrouvees != configuration.getNbExemplaires()) {
+			if (!checkConfiguration(configuration, cartes)){
 				return false;
 			}
 		}
 	
 		return true;
+	}
+	
+	private boolean checkConfiguration(Configuration configuration, Carte[] cartes) {
+		int nbTrouvees = 0;
+		
+		for (int i = 0; i < cartes.length; i++) {
+			if (cartes[i].equals(configuration.getCarte())) {
+				nbTrouvees++;
+			}
+		}
+		
+		return nbTrouvees == configuration.getNbExemplaires();
 	}
 	
 	private static class Configuration {

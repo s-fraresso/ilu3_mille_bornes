@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
@@ -20,5 +21,15 @@ public class GestionCartes {
 		iter.remove();
 		
 		return elementExtrait;
+	}
+	
+	public static <T> List<T> melanger(List<T> liste) {
+		List<T> listeMelangee = new ArrayList<>();
+		
+		while (!liste.isEmpty()) {
+			listeMelangee.add(GestionCartes.extraire(liste));
+		}
+		
+		return listeMelangee;
 	}
 }

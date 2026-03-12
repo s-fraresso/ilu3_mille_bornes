@@ -52,6 +52,25 @@ public class JeuDeCartes {
 		return cartes;
 	}
 	
+	public boolean checkCount() {
+		Carte[] cartes = donnerCartes();
+		
+		for (Configuration configuration : typesDeCartes) {
+			int nbTrouvees = 0;
+			for (int i = 0; i < cartes.length; i++) {
+				if (cartes[i].equals(configuration.getCarte())) {
+					nbTrouvees++;
+				}
+			}
+			
+			if (nbTrouvees != configuration.getNbExemplaires()) {
+				return false;
+			}
+		}
+	
+		return true;
+	}
+	
 	private static class Configuration {
 		private Carte carte;
 		private int nbExemplaires;

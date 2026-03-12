@@ -47,4 +47,41 @@ public class GestionCartes {
 		
 		return true;
 	}
+	
+	public static <T> List<T> rassembler(List<T> liste){
+		if (liste.isEmpty()) {
+			return liste;
+		}
+		
+		List<T> listeRassemblee = new ArrayList<>();
+		T elementAjoute = null;
+		
+		while (listeRassemblee.size() != liste.size()) {
+			for (T element : liste) {
+				if (!listeRassemblee.contains(element)) {
+					elementAjoute = element;
+					break;
+				}
+			}
+			
+			for (T element : liste) {
+				if (element.equals(elementAjoute)){
+					listeRassemblee.add(element);
+				}
+			}
+		}
+		
+		return listeRassemblee;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

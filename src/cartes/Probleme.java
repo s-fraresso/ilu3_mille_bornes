@@ -10,4 +10,13 @@ public abstract class Probleme extends Carte {
 	public Type getType() {
 		return type;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!super.equals(obj)) {
+			return false;
+		}
+		Probleme probleme = (Probleme) obj;
+		return type.equals(probleme.getType());
+	}
 }

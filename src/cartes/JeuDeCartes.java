@@ -1,7 +1,5 @@
 package cartes;
 
-import java.util.Iterator;
-
 public class JeuDeCartes {
 	private Configuration[] typesDeCartes = {
 			new Configuration(new Borne(25), 10),

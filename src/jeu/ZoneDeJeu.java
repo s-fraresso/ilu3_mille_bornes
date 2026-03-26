@@ -7,6 +7,7 @@ import java.util.List;
 import cartes.Bataille;
 import cartes.Borne;
 import cartes.Carte;
+import cartes.Cartes;
 import cartes.FinLimite;
 import cartes.Limite;
 
@@ -50,5 +51,14 @@ public class ZoneDeJeu {
 		else {
 			pileBataille.add((Bataille) carte);
 		}
+	}
+	
+	public boolean peutAvancer() {
+		if (pileBataille.isEmpty()) {
+			return false;
+		}
+		
+		Bataille sommetBataille = pileBataille.getLast();
+		return sommetBataille.equals(Cartes.FEU_VERT);
 	}
 }

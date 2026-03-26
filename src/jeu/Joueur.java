@@ -26,6 +26,10 @@ public class Joueur {
 		return carte;
 	}
 	
+	public int donnerKmParcourus() {
+		return zoneDeJeu.donnerKmParcourus();
+	}
+	
 	public String getNom() {
 		return nom;
 	}

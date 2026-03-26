@@ -6,6 +6,10 @@ public class Borne extends Carte {
 	public Borne(int km) {
 		this.km = km;
 	}
+	
+	public int getKm() {
+		return km;
+	}
 
 	@Override
 	public String toString() {

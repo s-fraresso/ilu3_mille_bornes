@@ -1,5 +1,7 @@
 package jeu;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import cartes.Bataille;
@@ -8,9 +10,9 @@ import cartes.FinLimite;
 import cartes.Limite;
 
 public class ZoneDeJeu {
-	private List<Bataille> pileBataille;
-	private List<Limite> pileLimite;
-	private List<Borne> pileBornes;
+	private List<Bataille> pileBataille = new ArrayList<>();
+	private List<Limite> pileLimite = new ArrayList<>();
+	private List<Borne> pileBornes = new ArrayList<>();
 	
 	
 	public int donnerLimitationVitesse() {
@@ -24,5 +26,16 @@ public class ZoneDeJeu {
 		}
 		
 		return 50;
+	}
+	
+	public int donnerKmParcourus() {
+		int km = 0;
+		
+		for(Iterator<Borne> iter = pileBornes.iterator(); iter.hasNext();) {
+			Borne borne = iter.next();
+			km += borne.getKm();
+		}
+		
+		return km;
 	}
 }

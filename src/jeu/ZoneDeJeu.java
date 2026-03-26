@@ -24,7 +24,7 @@ public class ZoneDeJeu {
 	
 	
 	public int donnerLimitationVitesse() {
-		if (pileLimite.isEmpty()) {
+		if (estPrioritaire() || pileLimite.isEmpty()) {
 			return 200;
 		}
 		

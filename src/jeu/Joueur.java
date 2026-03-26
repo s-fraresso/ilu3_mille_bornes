@@ -16,6 +16,16 @@ public class Joueur {
 		main.prendre(carte);
 	}
 	
+	public Carte prendreCarte(Sabot sabot) {
+		if (sabot.estVide()) {
+			return null;
+		}
+		
+		Carte carte = sabot.piocher();
+		donner(carte);
+		return carte;
+	}
+	
 	public String getNom() {
 		return nom;
 	}

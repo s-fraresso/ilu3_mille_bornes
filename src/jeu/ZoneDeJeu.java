@@ -135,6 +135,10 @@ public class ZoneDeJeu {
 		
 		return false;
 	}
+	
+	private boolean estPrioritaire() {
+		return bottes.contains(Cartes.PRIORITAIRE);
+	}
 }
 
 

@@ -1,16 +1,27 @@
 package jeu;
 
+import cartes.Carte;
+
 public class Joueur {
 	private String nom;
 	private ZoneDeJeu zoneDeJeu;
+	private MainJoueur main = new MainJoueur();
 	
 	public Joueur(String nom, ZoneDeJeu zoneDeJeu) {
 		this.nom = nom;
 		this.zoneDeJeu = zoneDeJeu;
 	}
 	
+	public void donner(Carte carte) {
+		main.prendre(carte);
+	}
+	
 	public String getNom() {
 		return nom;
+	}
+	
+	public MainJoueur getMain() {
+		return main;
 	}
 	
 	@Override

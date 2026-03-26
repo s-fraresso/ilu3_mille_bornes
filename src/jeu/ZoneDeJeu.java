@@ -65,7 +65,7 @@ public class ZoneDeJeu {
 		return sommetBataille.equals(Cartes.FEU_VERT);
 	}
 	
-	public boolean estDepotFeuVertAutorise() {
+	private boolean estDepotFeuVertAutorise() {
 		if (pileBataille.isEmpty()) {
 			return true;
 		}
@@ -78,7 +78,7 @@ public class ZoneDeJeu {
 		return sommetBataille.equals(Cartes.FEU_ROUGE);
 	}
 	
-	public boolean estDepotBorneAutorise(Borne borne) {
+	private boolean estDepotBorneAutorise(Borne borne) {
 		if (donnerLimitationVitesse() < borne.getKm() || donnerKmParcourus() + borne.getKm() > 1000) {
 			return false;
 		}
@@ -87,7 +87,7 @@ public class ZoneDeJeu {
 		return sommetBataille.equals(Cartes.FEU_VERT);
 	}
 	
-	public boolean estDepotLimiteAutorise(Limite limite) {
+	private boolean estDepotLimiteAutorise(Limite limite) {
 		if (limite instanceof DebutLimite) {
 			return pileLimite.isEmpty() || pileLimite.getLast() instanceof FinLimite;
 		}
@@ -96,7 +96,7 @@ public class ZoneDeJeu {
 		}
 	}
 	
-	public boolean estDepotBatailleAutorise(Bataille bataille) {
+	private boolean estDepotBatailleAutorise(Bataille bataille) {
 		if (bataille instanceof Attaque) {
 			return peutAvancer();
 		}
@@ -115,6 +115,22 @@ public class ZoneDeJeu {
 		}
 		
 		return false; // cas où bataille est une botte, à implémenter plus tard
+	}
+	
+	public boolean estDepotAutorise(Carte carte) {
+		if (carte instanceof Bataille bataille) {
+			return estDepotBatailleAutorise(bataille);
+		}
+		
+		if (carte instanceof Limite limite) {
+			return estDepotLimiteAutorise(limite);
+		}
+		
+		if (carte instanceof Borne borne) {
+			return estDepotBorneAutorise(borne);
+		}
+		
+		return false;
 	}
 }
 

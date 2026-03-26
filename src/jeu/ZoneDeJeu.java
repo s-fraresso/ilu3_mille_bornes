@@ -8,6 +8,7 @@ import cartes.Bataille;
 import cartes.Borne;
 import cartes.Carte;
 import cartes.Cartes;
+import cartes.DebutLimite;
 import cartes.FinLimite;
 import cartes.Limite;
 import cartes.Parade;
@@ -83,6 +84,15 @@ public class ZoneDeJeu {
 		
 		Bataille sommetBataille = pileBataille.getLast();
 		return sommetBataille.equals(Cartes.FEU_VERT);
+	}
+	
+	public boolean estDepotLimiteAutorise(Limite limite) {
+		if (limite instanceof DebutLimite) {
+			return pileLimite.isEmpty() || pileLimite.getLast() instanceof FinLimite;
+		}
+		else {
+			return !pileLimite.isEmpty() && pileLimite.getLast() instanceof DebutLimite;
+		}
 	}
 }
 

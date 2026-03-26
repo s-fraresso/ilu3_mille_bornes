@@ -7,9 +7,9 @@ import cartes.Borne;
 import cartes.Carte;
 
 public class ZoneDeJeu {
-	List<Bataille> pileBataille;
-	List<Carte> pileLimite;
-	List<Borne> pileBornes;
+	private List<Bataille> pileBataille;
+	private List<Carte> pileLimite;
+	private List<Borne> pileBornes;
 	
 	
 }

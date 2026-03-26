@@ -6,6 +6,7 @@ import java.util.List;
 
 import cartes.Bataille;
 import cartes.Borne;
+import cartes.Carte;
 import cartes.FinLimite;
 import cartes.Limite;
 
@@ -37,5 +38,17 @@ public class ZoneDeJeu {
 		}
 		
 		return km;
+	}
+	
+	public void deposer(Carte carte) {
+		if (carte instanceof Borne borne) {
+			pileBornes.add(borne);
+		}
+		else if (carte instanceof Limite limite) {
+			pileLimite.add(limite);
+		}
+		else {
+			pileBataille.add((Bataille) carte);
+		}
 	}
 }

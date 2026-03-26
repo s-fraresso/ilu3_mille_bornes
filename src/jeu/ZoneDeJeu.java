@@ -15,6 +15,7 @@ import cartes.DebutLimite;
 import cartes.FinLimite;
 import cartes.Limite;
 import cartes.Parade;
+import cartes.Type;
 
 public class ZoneDeJeu {
 	private List<Bataille> pileBataille = new ArrayList<>();
@@ -64,11 +65,15 @@ public class ZoneDeJeu {
 	
 	public boolean peutAvancer() {
 		if (pileBataille.isEmpty()) {
-			return false;
+			return estPrioritaire();
 		}
 		
 		Bataille sommetBataille = pileBataille.getLast();
-		return sommetBataille.equals(Cartes.FEU_VERT);
+		if (sommetBataille instanceof Parade parade) {
+			return parade.equals(Cartes.FEU_VERT) || estPrioritaire();
+		}
+
+		return estPrioritaire() && bottes.contains(new Botte(sommetBataille.getType())); // sommetBataille est forcément une attaque
 	}
 	
 	private boolean estDepotFeuVertAutorise() {

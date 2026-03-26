@@ -54,8 +54,11 @@ public class ZoneDeJeu {
 		else if (carte instanceof Limite limite) {
 			pileLimite.add(limite);
 		}
+		else if (carte instanceof Bataille bataille){
+			pileBataille.add(bataille);
+		}
 		else {
-			pileBataille.add((Bataille) carte);
+			bottes.add((Botte) carte);
 		}
 	}
 	

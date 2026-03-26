@@ -30,10 +30,10 @@ public class TestSabot {
 
 	// 4.2.b
 	public void questionB() {
-//		for (Iterator<Carte> iterator = sabot.iterator(); iterator.hasNext();) {
-//			System.out.println("Je pioche " + iterator.next());
-//			iterator.remove();
-//		}
+		for (Iterator<Carte> iterator = sabot.iterator(); iterator.hasNext();) {
+			System.out.println("Je pioche " + iterator.next());
+			iterator.remove();
+		}
 	}
 
 	// 4.2.c
@@ -44,7 +44,7 @@ public class TestSabot {
 			Carte carte = iterator.next();
 			System.out.println("Je pioche " + carte);
 			iterator.remove();
-			cartePiochee = sabot.piocher();
+//			cartePiochee = sabot.piocher();
 			sabot.ajouterCarte(new Botte(cartes.Type.ACCIDENT));
 		}
 		Iterator<Carte> iterator = sabot.iterator();

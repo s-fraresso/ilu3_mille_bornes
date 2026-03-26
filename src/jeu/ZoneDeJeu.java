@@ -10,6 +10,7 @@ import cartes.Carte;
 import cartes.Cartes;
 import cartes.FinLimite;
 import cartes.Limite;
+import cartes.Parade;
 
 public class ZoneDeJeu {
 	private List<Bataille> pileBataille = new ArrayList<>();
@@ -61,4 +62,43 @@ public class ZoneDeJeu {
 		Bataille sommetBataille = pileBataille.getLast();
 		return sommetBataille.equals(Cartes.FEU_VERT);
 	}
+	
+	public boolean estDepotFeuVertAutorise() {
+		if (pileBataille.isEmpty()) {
+			return true;
+		}
+		
+		Bataille sommetBataille = pileBataille.getLast();
+		if (sommetBataille instanceof Parade parade) {
+			return !parade.equals(Cartes.FEU_VERT);
+		}
+		
+		return sommetBataille.equals(Cartes.FEU_ROUGE);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

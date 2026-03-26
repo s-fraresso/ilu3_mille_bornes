@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import cartes.Attaque;
 import cartes.Bataille;
 import cartes.Borne;
 import cartes.Carte;
@@ -93,6 +94,27 @@ public class ZoneDeJeu {
 		else {
 			return !pileLimite.isEmpty() && pileLimite.getLast() instanceof DebutLimite;
 		}
+	}
+	
+	public boolean estDepotBatailleAutorise(Bataille bataille) {
+		if (bataille instanceof Attaque) {
+			return peutAvancer();
+		}
+		else if (bataille instanceof Parade parade) {
+			if (parade.equals(Cartes.FEU_VERT)) {
+				return estDepotFeuVertAutorise();
+			}
+			else {
+				if (pileBataille.isEmpty()) {
+					return false;
+				}
+				
+				Bataille sommetBataille = pileBataille.getLast();
+				return sommetBataille instanceof Attaque && sommetBataille.getType().equals(parade.getType());
+			}
+		}
+		
+		return false; // cas où bataille est une botte, à implémenter plus tard
 	}
 }
 

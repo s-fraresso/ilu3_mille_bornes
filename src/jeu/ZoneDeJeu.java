@@ -75,6 +75,15 @@ public class ZoneDeJeu {
 		
 		return sommetBataille.equals(Cartes.FEU_ROUGE);
 	}
+	
+	public boolean estDepotBorneAutorise(Borne borne) {
+		if (donnerLimitationVitesse() < borne.getKm() || donnerKmParcourus() + borne.getKm() > 1000) {
+			return false;
+		}
+		
+		Bataille sommetBataille = pileBataille.getLast();
+		return sommetBataille.equals(Cartes.FEU_VERT);
+	}
 }
 
 

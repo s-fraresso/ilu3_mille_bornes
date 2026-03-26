@@ -30,6 +30,10 @@ public class Joueur {
 		return zoneDeJeu.donnerKmParcourus();
 	}
 	
+	public void deposer(Carte carte) {
+		zoneDeJeu.deposer(carte);
+	}
+	
 	public String getNom() {
 		return nom;
 	}

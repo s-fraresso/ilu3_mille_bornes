@@ -15,6 +15,7 @@ public class Jeu {
 	
 	private Sabot sabot;
 	private LinkedHashSet<Joueur> joueurs = new LinkedHashSet<>();
+	private Iterator<Joueur> iterJoueurs;
 	
 	public void inscrire(Joueur ... joueursInscrits) {
 		for (Joueur joueur : joueursInscrits) {
@@ -28,6 +29,16 @@ public class Jeu {
 				joueur.donner(sabot.piocher());
 			}
 		}
+	}
+	
+	public Joueur donnerJoueurSuivant() {
+		if (joueurs.isEmpty()) {
+			throw new IllegalStateException("Aucun joueur");
+		}
+		if (iterJoueurs == null || !iterJoueurs.hasNext()) {
+			iterJoueurs = joueurs.iterator();
+		}
+		return iterJoueurs.next();
 	}
 	
 	public String jouerTour(Joueur joueur) {

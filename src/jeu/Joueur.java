@@ -1,5 +1,9 @@
 package jeu;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import cartes.Carte;
 
 public class Joueur {
@@ -34,6 +38,26 @@ public class Joueur {
 		zoneDeJeu.deposer(carte);
 	}
 	
+	public HashSet<Coup> coupsPossibles(Set<Joueur> participants){
+		HashSet<Coup> coups = new HashSet<>();
+		
+		for (Joueur joueurCourant : participants) {
+			MainJoueur main = joueurCourant.getMain();
+			for (Iterator<Carte> iter = main.iterator(); iter.hasNext();) {
+				Carte carte = iter.next();
+				
+				for (Joueur joueurCible : participants) {
+					Coup coup = new Coup(joueurCourant, carte, joueurCible);
+					if (coup.estValide()) {
+						coups.add(coup);
+					}
+				}
+			}
+		}
+		
+		return coups;
+	}
+	
 	public String getNom() {
 		return nom;
 	}
@@ -50,8 +74,13 @@ public class Joueur {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Joueur joueur) {
-			return nom == joueur.getNom();
+			return nom.equals(joueur.getNom());
 		}
 		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return 19 * nom.hashCode();
 	}
 }

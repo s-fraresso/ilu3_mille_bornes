@@ -13,6 +13,6 @@ public class Botte extends Probleme {
 	
 	@Override
 	public int hashCode() {
-		return 67 * getType().hashCode();
+		return 31 * getType().hashCode();
 	}
 }

@@ -39,4 +39,19 @@ public class Coup {
 		
 		return joueurCourant.equals(joueurCible);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Coup coup) {
+			return joueurCourant.equals(coup.getJoueurCourant()) &&
+					carteJouee.equals(coup.getCarteJouee()) &&
+					joueurCible.equals(coup.getJoueurCible());
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return 23 * joueurCourant.hashCode() * carteJouee.hashCode() * joueurCible.hashCode();
+	}
 }

@@ -117,6 +117,10 @@ public class ZoneDeJeu {
 	}
 	
 	private boolean estDepotBatailleAutorise(Bataille bataille) {
+		if (bottes.contains(new Botte(bataille.getType()))) {
+			return false;
+		}
+		
 		if (bataille instanceof Attaque) {
 			return peutAvancer();
 		}

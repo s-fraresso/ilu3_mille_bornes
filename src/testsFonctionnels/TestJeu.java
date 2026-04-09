@@ -13,13 +13,6 @@ public class TestJeu {
 		
 		jeu.inscrire(jack, bill, luffy);
 		jeu.distribuerCartes();
-		
-		System.out.println(jack.afficherEtatJoueur());
-		System.out.println(bill.afficherEtatJoueur());
-		System.out.println(luffy.afficherEtatJoueur());
-		
-		System.out.println(jeu.jouerTour(jack));
-		System.out.println(jeu.jouerTour(bill));
-		System.out.println(jeu.jouerTour(luffy));
+		System.out.println(jeu.lancer());
 	}
 }

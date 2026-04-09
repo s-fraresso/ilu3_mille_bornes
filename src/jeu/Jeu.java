@@ -66,8 +66,27 @@ public class Jeu {
 		else {
 			coup.getJoueurCible().deposer(carteJouee);
 		}
-		out.append(joueur.getNom() + " " + coup.toString() + "\n");
+		out.append(joueur.getNom() + " " + coup.toString() + "\n\n");
 		
+		return out.toString();
+	}
+	
+	public String lancer() {
+		StringBuilder out = new StringBuilder("Debut : \n\n");
+		
+		while (!sabot.estVide()) {
+			Joueur joueurCourant = donnerJoueurSuivant();
+			out.append(jouerTour(joueurCourant));
+			
+			int km = joueurCourant.donnerKmParcourus();
+			if (km >= 1000) {
+				out.append(joueurCourant.getNom()).append(" a parcouru ").append(Integer.toString(km));
+				out.append(" km. Il remporte la partie.\n");
+				return out.toString();
+			}
+		}
+		
+		out.append("Le sabot est épuisé, la partie est terminée.\n");
 		return out.toString();
 	}
 	

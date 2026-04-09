@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
+import cartes.Botte;
 import cartes.Carte;
 
 public class Joueur {
@@ -84,6 +85,29 @@ public class Joueur {
 		
 		Coup coupsArr[] = coups.toArray(new Coup[coups.size()]);
 		return coupsArr[rng.nextInt(coupsArr.length)];
+	}
+	
+	String afficherEtatJoueur() {
+		StringBuilder out = new StringBuilder("Bottes :\n");
+		for (Botte botte : zoneDeJeu.getBottes()) {
+			out.append(botte.toString());
+		}
+		
+		out.append("\nLimitation de vitesse : " + (zoneDeJeu.donnerLimitationVitesse() != 200));
+		if (zoneDeJeu.getPileBataille().isEmpty()) {
+			out.append("\nSommet de la pile de Bataille : null");
+		}
+		else {
+			out.append("\nSommet de la pile de Bataille : " + zoneDeJeu.getPileBataille().getLast());
+		}
+		
+		out.append("Contenu de la main :\n");
+		for (Iterator<Carte> iter = main.iterator(); iter.hasNext();) {
+			Carte carte = iter.next();
+			out.append(carte.toString());
+		}
+		
+		return out.toString();
 	}
 	
 	public String getNom() {

@@ -160,6 +160,14 @@ public class ZoneDeJeu {
 	private boolean estPrioritaire() {
 		return bottes.contains(Cartes.PRIORITAIRE);
 	}
+	
+	public HashSet<Botte> getBottes() {
+		return bottes;
+	}
+	
+	public List<Bataille> getPileBataille() {
+		return pileBataille;
+	}
 }
 
 

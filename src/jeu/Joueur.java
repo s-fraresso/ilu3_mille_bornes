@@ -58,6 +58,17 @@ public class Joueur {
 		return coups;
 	}
 	
+	public HashSet<Coup> coupsDefausse(){
+		HashSet<Coup> coups = new HashSet<>();
+		
+		for (Iterator<Carte> iter = main.iterator(); iter.hasNext();) {
+			Carte carte = iter.next();
+			coups.add(new Coup(this, carte, null));
+		}
+		
+		return coups;
+	}
+	
 	public String getNom() {
 		return nom;
 	}

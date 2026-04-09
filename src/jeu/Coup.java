@@ -29,10 +29,6 @@ public class Coup {
 	}
 	
 	public boolean estValide() {
-		if (joueurCible == null) {
-			return true;
-		}
-		
 		if (carteJouee instanceof Attaque || carteJouee instanceof DebutLimite) {
 			return !joueurCourant.equals(joueurCible);
 		}

@@ -2,6 +2,7 @@ package jeu;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Set;
 
 import cartes.Carte;
@@ -71,6 +72,18 @@ public class Joueur {
 	
 	public void retirerDeLaMain(Carte carte) {
 		main.jouer(carte);
+	}
+	
+	public Coup choisirCoup(Set<Joueur> participants) {
+		Random rng = new Random();
+		
+		HashSet<Coup> coups = coupsPossibles(participants);
+		if (coups.isEmpty()) {
+			coups = coupsDefausse();
+		}
+		
+		Coup coupsArr[] = coups.toArray(new Coup[coups.size()]);
+		return coupsArr[rng.nextInt(coupsArr.length)];
 	}
 	
 	public String getNom() {

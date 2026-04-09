@@ -104,6 +104,10 @@ public class ZoneDeJeu {
 	}
 	
 	private boolean estDepotLimiteAutorise(Limite limite) {
+		if (estPrioritaire()) {
+			return false;
+		}
+		
 		if (limite instanceof DebutLimite) {
 			return pileLimite.isEmpty() || pileLimite.getLast() instanceof FinLimite;
 		}

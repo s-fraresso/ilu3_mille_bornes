@@ -77,6 +77,10 @@ public class ZoneDeJeu {
 	}
 	
 	private boolean estDepotFeuVertAutorise() {
+		if (estPrioritaire()) {
+			return false;
+		}
+		
 		if (pileBataille.isEmpty()) {
 			return true;
 		}
@@ -86,7 +90,8 @@ public class ZoneDeJeu {
 			return !parade.equals(Cartes.FEU_VERT);
 		}
 		
-		return sommetBataille.equals(Cartes.FEU_ROUGE);
+		// sommetBataille est obligatoirement une attaque
+		return sommetBataille.equals(Cartes.FEU_ROUGE) || bottes.contains(new Botte(sommetBataille.getType()));)
 	}
 	
 	private boolean estDepotBorneAutorise(Borne borne) {

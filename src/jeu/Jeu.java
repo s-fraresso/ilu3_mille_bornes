@@ -10,12 +10,22 @@ import cartes.JeuDeCartes;
 import utils.GestionCartes;
 
 public class Jeu {
+	private final static int NBCARTES = 6;
+	
 	private Sabot sabot;
 	private LinkedHashSet<Joueur> joueurs;
 	
 	public void inscrire(Joueur ... joueursInscrits) {
 		for (Joueur joueur : joueursInscrits) {
 			joueurs.add(joueur);
+		}
+	}
+	
+	public void distribuerCartes() {
+		for (int i = 0; i < NBCARTES; i++) {
+			for (Joueur joueur : joueurs) {
+				joueur.donner(sabot.piocher());
+			}
 		}
 	}
 	

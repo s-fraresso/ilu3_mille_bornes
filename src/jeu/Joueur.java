@@ -38,7 +38,7 @@ public class Joueur {
 		zoneDeJeu.deposer(carte);
 	}
 	
-	public HashSet<Coup> coupsPossibles(Set<Joueur> participants){
+	public HashSet<Coup> coupsPossibles(Set<Joueur> participants) {
 		HashSet<Coup> coups = new HashSet<>();
 		
 		for (Joueur joueurCourant : participants) {
@@ -58,7 +58,7 @@ public class Joueur {
 		return coups;
 	}
 	
-	public HashSet<Coup> coupsDefausse(){
+	public HashSet<Coup> coupsDefausse() {
 		HashSet<Coup> coups = new HashSet<>();
 		
 		for (Iterator<Carte> iter = main.iterator(); iter.hasNext();) {
@@ -67,6 +67,10 @@ public class Joueur {
 		}
 		
 		return coups;
+	}
+	
+	public void retirerDeLaMain(Carte carte) {
+		main.jouer(carte);
 	}
 	
 	public String getNom() {

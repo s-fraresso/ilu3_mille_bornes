@@ -29,6 +29,15 @@ public class Jeu {
 		}
 	}
 	
+	public String jouerTour(Joueur joueur) {
+		StringBuilder out = new StringBuilder();
+		Carte cartePiochee = sabot.piocher();
+		joueur.donner(cartePiochee);
+		out.append("Le joueur " + joueur.getNom() + "a pioche " + cartePiochee.toString());
+		
+		
+	}
+	
 	public Jeu() {
 		JeuDeCartes jeuDeCartes = new JeuDeCartes();
 		Carte[] cartes = jeuDeCartes.donnerCartes();

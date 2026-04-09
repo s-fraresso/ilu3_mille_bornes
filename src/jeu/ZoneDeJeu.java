@@ -91,7 +91,7 @@ public class ZoneDeJeu {
 		}
 		
 		// sommetBataille est obligatoirement une attaque
-		return sommetBataille.equals(Cartes.FEU_ROUGE) || bottes.contains(new Botte(sommetBataille.getType()));)
+		return sommetBataille.equals(Cartes.FEU_ROUGE) || bottes.contains(new Botte(sommetBataille.getType()));
 	}
 	
 	private boolean estDepotBorneAutorise(Borne borne) {
@@ -154,7 +154,7 @@ public class ZoneDeJeu {
 			return estDepotBorneAutorise(borne);
 		}
 		
-		return false;
+		return true; // On peut toujours déposer une botte
 	}
 	
 	private boolean estPrioritaire() {

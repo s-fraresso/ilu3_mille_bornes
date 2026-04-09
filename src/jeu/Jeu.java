@@ -34,7 +34,7 @@ public class Jeu {
 		StringBuilder out = new StringBuilder();
 		Carte cartePiochee = sabot.piocher();
 		joueur.donner(cartePiochee);
-		out.append("Le joueur " + joueur.getNom() + "a pioche " + cartePiochee.toString());
+		out.append("Le joueur " + joueur.getNom() + " a pioche " + cartePiochee.toString() + "\n");
 		
 		out.append("Il a dans sa main : [");
 		for (Iterator<Carte> iter = joueur.getMain().iterator(); iter.hasNext();) {
@@ -55,7 +55,7 @@ public class Jeu {
 		else {
 			coup.getJoueurCible().deposer(carteJouee);
 		}
-		out.append(joueur.getNom() + coup.toString());
+		out.append(joueur.getNom() + " " + coup.toString() + "\n");
 		
 		return out.toString();
 	}

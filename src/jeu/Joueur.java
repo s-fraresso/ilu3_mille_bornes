@@ -83,10 +83,11 @@ public class Joueur {
 		return coupsArr[random.nextInt(coupsArr.length)];
 	}
 	
-	String afficherEtatJoueur() {
-		StringBuilder out = new StringBuilder("Bottes :\n");
+	public String afficherEtatJoueur() {
+		StringBuilder out = new StringBuilder("Joueur : " + nom);
+		out.append("\nBottes : ");
 		for (Botte botte : zoneDeJeu.getBottes()) {
-			out.append(botte.toString());
+			out.append(botte.toString()).append(" ");
 		}
 		
 		out.append("\nLimitation de vitesse : " + (zoneDeJeu.donnerLimitationVitesse() != 200));
@@ -97,11 +98,15 @@ public class Joueur {
 			out.append("\nSommet de la pile de Bataille : " + zoneDeJeu.getPileBataille().getFirst());
 		}
 		
-		out.append("\nContenu de la main :\n");
+		out.append("\nContenu de la main : ");
 		for (Iterator<Carte> iter = main.iterator(); iter.hasNext();) {
 			Carte carte = iter.next();
 			out.append(carte.toString());
+			if (iter.hasNext()) {
+				out.append(", ");
+			}
 		}
+		out.append("\n");
 		
 		return out.toString();
 	}
@@ -112,6 +117,10 @@ public class Joueur {
 	
 	public MainJoueur getMain() {
 		return main;
+	}
+	
+	public ZoneDeJeu getZoneDeJeu() {
+		return zoneDeJeu;
 	}
 	
 	@Override

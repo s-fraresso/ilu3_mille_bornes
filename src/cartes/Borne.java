@@ -24,4 +24,9 @@ public class Borne extends Carte {
 		Borne borne = (Borne) obj;
 		return km == borne.km;
 	}
+	
+	@Override
+	public int hashCode() {
+		return 41 * km;
+	}
 }

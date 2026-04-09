@@ -9,7 +9,7 @@ import cartes.JeuDeCartes;
 import utils.GestionCartes;
 
 public class TestGestionCartes {
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		JeuDeCartes jeu = new JeuDeCartes();
 		List<Carte> listeCarteNonMelangee = new LinkedList<>();
 		for (Carte carte : jeu.donnerCartes()) {

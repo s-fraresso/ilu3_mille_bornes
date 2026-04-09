@@ -97,7 +97,9 @@ public class ZoneDeJeu {
 	}
 	
 	private boolean estDepotBorneAutorise(Borne borne) {
-		if (donnerLimitationVitesse() < borne.getKm() || donnerKmParcourus() + borne.getKm() > 1000) {
+		if (donnerLimitationVitesse() < borne.getKm()
+				||donnerKmParcourus() + borne.getKm() > 1000
+				|| pileBataille.isEmpty()) {
 			return false;
 		}
 		

@@ -19,4 +19,9 @@ public abstract class Probleme extends Carte {
 		Probleme probleme = (Probleme) obj;
 		return type.equals(probleme.getType());
 	}
+	
+	@Override
+	public int hashCode() {
+		return 31 * getType().hashCode();
+	}
 }

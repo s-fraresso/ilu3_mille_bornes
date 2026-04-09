@@ -50,4 +50,13 @@ public class Coup {
 	public int hashCode() {
 		return 23 * joueurCourant.hashCode() * carteJouee.hashCode() * joueurCible.hashCode();
 	}
+	
+	@Override
+	public String toString() {
+		if (joueurCible == null) {
+			return "defausse la carte " + carteJouee.toString();
+		}
+		return "depose la carte " + carteJouee.toString() + "dans la zone de jeu de " + joueurCible.getNom();
+
+	}
 }

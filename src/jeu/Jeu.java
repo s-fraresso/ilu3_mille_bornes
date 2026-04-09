@@ -2,6 +2,7 @@ package jeu;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -10,14 +11,14 @@ import cartes.JeuDeCartes;
 import utils.GestionCartes;
 
 public class Jeu {
-	private final static int NBCARTES = 6;
+	private static final int NBCARTES = 6;
 	
 	private Sabot sabot;
-	private LinkedHashSet<Joueur> joueurs;
+	private LinkedHashSet<Joueur> joueurs = new LinkedHashSet<>();
 	
 	public void inscrire(Joueur ... joueursInscrits) {
 		for (Joueur joueur : joueursInscrits) {
-			joueurs.add(joueur);
+			joueurs.addLast(joueur);
 		}
 	}
 	
@@ -35,7 +36,28 @@ public class Jeu {
 		joueur.donner(cartePiochee);
 		out.append("Le joueur " + joueur.getNom() + "a pioche " + cartePiochee.toString());
 		
+		out.append("Il a dans sa main : [");
+		for (Iterator<Carte> iter = joueur.getMain().iterator(); iter.hasNext();) {
+			Carte carte = iter.next();
+			out.append(carte.toString());
+			if (iter.hasNext()) {
+				out.append(", ");
+			}
+		}
+		out.append("]\n");
 		
+		Coup coup = joueur.choisirCoup(joueurs);
+		Carte carteJouee = coup.getCarteJouee();
+		joueur.retirerDeLaMain(carteJouee);
+		if (coup.getJoueurCible() == null) {
+			sabot.ajouterCarte(carteJouee);
+		}
+		else {
+			coup.getJoueurCible().deposer(carteJouee);
+		}
+		out.append(joueur.getNom() + coup.toString());
+		
+		return out.toString();
 	}
 	
 	public Jeu() {

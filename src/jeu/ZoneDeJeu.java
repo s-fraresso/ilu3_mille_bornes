@@ -1,9 +1,10 @@
 package jeu;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import cartes.Attaque;
 import cartes.Bataille;
@@ -15,12 +16,11 @@ import cartes.DebutLimite;
 import cartes.FinLimite;
 import cartes.Limite;
 import cartes.Parade;
-import cartes.Type;
 
 public class ZoneDeJeu {
-	private List<Bataille> pileBataille = new ArrayList<>();
-	private List<Limite> pileLimite = new ArrayList<>();
-	private List<Borne> pileBornes = new ArrayList<>();
+	private List<Bataille> pileBataille = new LinkedList<>();
+	private List<Limite> pileLimite = new LinkedList<>();
+	private List<Borne> pileBornes = new LinkedList<>();
 	private HashSet<Botte> bottes = new HashSet<>();
 	
 	
@@ -29,7 +29,7 @@ public class ZoneDeJeu {
 			return 200;
 		}
 		
-		Limite sommetLimite = pileLimite.getLast();
+		Limite sommetLimite = pileLimite.getFirst();
 		if (sommetLimite instanceof FinLimite) {
 			return 200;
 		}
@@ -49,17 +49,18 @@ public class ZoneDeJeu {
 	}
 	
 	public void deposer(Carte carte) {
-		if (carte instanceof Borne borne) {
-			pileBornes.add(borne);
-		}
-		else if (carte instanceof Limite limite) {
-			pileLimite.add(limite);
-		}
-		else if (carte instanceof Bataille bataille){
-			pileBataille.add(bataille);
-		}
-		else {
-			bottes.add((Botte) carte);
+		switch (carte) {
+			case Borne borne:
+				pileBornes.addFirst(borne);
+				break;
+			case Limite limite:
+				pileLimite.addFirst(limite);
+				break;
+			case Bataille bataille:
+				pileBataille.addFirst(bataille);
+  				break;
+  			default:
+  				bottes.add((Botte) carte);
 		}
 	}
 	
@@ -68,12 +69,13 @@ public class ZoneDeJeu {
 			return estPrioritaire();
 		}
 		
-		Bataille sommetBataille = pileBataille.getLast();
+		Bataille sommetBataille = pileBataille.getFirst();
 		if (sommetBataille instanceof Parade parade) {
 			return parade.equals(Cartes.FEU_VERT) || estPrioritaire();
 		}
 
-		return estPrioritaire() && bottes.contains(new Botte(sommetBataille.getType())); // sommetBataille est forcément une attaque
+		// sommetBataille est forcément une attaque
+		return estPrioritaire() && bottes.contains(new Botte(sommetBataille.getType())); 
 	}
 	
 	private boolean estDepotFeuVertAutorise() {
@@ -85,7 +87,7 @@ public class ZoneDeJeu {
 			return true;
 		}
 		
-		Bataille sommetBataille = pileBataille.getLast();
+		Bataille sommetBataille = pileBataille.getFirst();
 		if (sommetBataille instanceof Parade parade) {
 			return !parade.equals(Cartes.FEU_VERT);
 		}
@@ -99,7 +101,7 @@ public class ZoneDeJeu {
 			return false;
 		}
 		
-		Bataille sommetBataille = pileBataille.getLast();
+		Bataille sommetBataille = pileBataille.getFirst();
 		return sommetBataille.equals(Cartes.FEU_VERT);
 	}
 	
@@ -109,10 +111,10 @@ public class ZoneDeJeu {
 		}
 		
 		if (limite instanceof DebutLimite) {
-			return pileLimite.isEmpty() || pileLimite.getLast() instanceof FinLimite;
+			return pileLimite.isEmpty() || pileLimite.getFirst() instanceof FinLimite;
 		}
 		else {
-			return !pileLimite.isEmpty() && pileLimite.getLast() instanceof DebutLimite;
+			return !pileLimite.isEmpty() && pileLimite.getFirst() instanceof DebutLimite;
 		}
 	}
 	
@@ -121,10 +123,7 @@ public class ZoneDeJeu {
 			return false;
 		}
 		
-		if (bataille instanceof Attaque) {
-			return peutAvancer();
-		}
-		else if (bataille instanceof Parade parade) {
+		if (bataille instanceof Parade parade) {
 			if (parade.equals(Cartes.FEU_VERT)) {
 				return estDepotFeuVertAutorise();
 			}
@@ -133,35 +132,32 @@ public class ZoneDeJeu {
 					return false;
 				}
 				
-				Bataille sommetBataille = pileBataille.getLast();
+				Bataille sommetBataille = pileBataille.getFirst();
 				return sommetBataille instanceof Attaque && sommetBataille.getType().equals(parade.getType());
 			}
 		}
 		
-		return false; // cas où bataille est une botte, à implémenter plus tard
+		return peutAvancer(); // bataille est une attaque
 	}
 	
 	public boolean estDepotAutorise(Carte carte) {
-		if (carte instanceof Bataille bataille) {
-			return estDepotBatailleAutorise(bataille);
+		switch (carte) {
+			case Borne borne:
+				return estDepotBorneAutorise(borne);
+			case Limite limite:
+				return estDepotLimiteAutorise(limite);
+			case Bataille bataille:
+				return estDepotBatailleAutorise(bataille);
+			default:
+				return true; // On peut toujours déposer une botte
 		}
-		
-		if (carte instanceof Limite limite) {
-			return estDepotLimiteAutorise(limite);
-		}
-		
-		if (carte instanceof Borne borne) {
-			return estDepotBorneAutorise(borne);
-		}
-		
-		return true; // On peut toujours déposer une botte
 	}
 	
 	private boolean estPrioritaire() {
 		return bottes.contains(Cartes.PRIORITAIRE);
 	}
 	
-	public HashSet<Botte> getBottes() {
+	public Set<Botte> getBottes() {
 		return bottes;
 	}
 	

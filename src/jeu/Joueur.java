@@ -12,6 +12,7 @@ public class Joueur {
 	private String nom;
 	private ZoneDeJeu zoneDeJeu;
 	private MainJoueur main = new MainJoueur();
+	private Random random = new Random();
 	
 	public Joueur(String nom, ZoneDeJeu zoneDeJeu) {
 		this.nom = nom;
@@ -40,7 +41,7 @@ public class Joueur {
 		zoneDeJeu.deposer(carte);
 	}
 	
-	public HashSet<Coup> coupsPossibles(Set<Joueur> participants) {
+	public Set<Coup> coupsPossibles(Set<Joueur> participants) {
 		HashSet<Coup> coups = new HashSet<>();
 		
 		for (Joueur joueurCible : participants) {
@@ -57,7 +58,7 @@ public class Joueur {
 		return coups;
 	}
 	
-	public HashSet<Coup> coupsDefausse() {
+	public Set<Coup> coupsDefausse() {
 		HashSet<Coup> coups = new HashSet<>();
 		
 		for (Iterator<Carte> iter = main.iterator(); iter.hasNext();) {
@@ -73,15 +74,13 @@ public class Joueur {
 	}
 	
 	public Coup choisirCoup(Set<Joueur> participants) {
-		Random rng = new Random();
-		
-		HashSet<Coup> coups = coupsPossibles(participants);
+		Set<Coup> coups = coupsPossibles(participants);
 		if (coups.isEmpty()) {
 			coups = coupsDefausse();
 		}
 		
-		Coup coupsArr[] = coups.toArray(new Coup[coups.size()]);
-		return coupsArr[rng.nextInt(coupsArr.length)];
+		Coup[] coupsArr = coups.toArray(new Coup[coups.size()]);
+		return coupsArr[random.nextInt(coupsArr.length)];
 	}
 	
 	String afficherEtatJoueur() {
@@ -95,10 +94,10 @@ public class Joueur {
 			out.append("\nSommet de la pile de Bataille : null");
 		}
 		else {
-			out.append("\nSommet de la pile de Bataille : " + zoneDeJeu.getPileBataille().getLast());
+			out.append("\nSommet de la pile de Bataille : " + zoneDeJeu.getPileBataille().getFirst());
 		}
 		
-		out.append("Contenu de la main :\n");
+		out.append("\nContenu de la main :\n");
 		for (Iterator<Carte> iter = main.iterator(); iter.hasNext();) {
 			Carte carte = iter.next();
 			out.append(carte.toString());

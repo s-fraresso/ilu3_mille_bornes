@@ -27,4 +27,14 @@ public interface Strategie {
 		
 		return coupsTries;
 	}
+	
+	public default Coup SelectionnerCoup(Set<Coup> coups) {
+		NavigableSet<Coup> coupsTries = trierCoups(coups);
+		return coupsTries.getFirst();
+	}
+	
+	public default Coup SelectionnerDefausse(Set<Coup> coups) {
+		NavigableSet<Coup> coupsTries = trierCoups(coups);
+		return coupsTries.getLast();
+	}
 }

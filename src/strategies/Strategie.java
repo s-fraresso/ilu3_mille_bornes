@@ -24,6 +24,7 @@ public interface Strategie {
 				}
 			}
 		);
+		coupsTries.addAll(coups);
 		
 		return coupsTries;
 	}

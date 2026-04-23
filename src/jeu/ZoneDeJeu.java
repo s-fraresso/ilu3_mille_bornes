@@ -97,14 +97,7 @@ public class ZoneDeJeu {
 	}
 	
 	private boolean estDepotBorneAutorise(Borne borne) {
-		if (donnerLimitationVitesse() < borne.getKm()
-				||donnerKmParcourus() + borne.getKm() > 1000
-				|| pileBataille.isEmpty()) {
-			return false;
-		}
-		
-		Bataille sommetBataille = pileBataille.getFirst();
-		return sommetBataille.equals(Cartes.FEU_VERT);
+		return borne.getKm() <= donnerLimitationVitesse() && (donnerKmParcourus() + borne.getKm()) <= 1000 && peutAvancer();
 	}
 	
 	private boolean estDepotLimiteAutorise(Limite limite) {

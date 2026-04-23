@@ -2,9 +2,12 @@ package jeu;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.NavigableSet;
+import java.util.TreeSet;
 
 import cartes.Carte;
 import cartes.JeuDeCartes;
@@ -66,7 +69,7 @@ public class Jeu {
 		else {
 			coup.getJoueurCible().deposer(carteJouee);
 		}
-		out.append(joueur.getNom() + " " + coup.toString() + "\n\n");
+		out.append(joueur.getNom() + " " + coup.toString() + "\n");
 		
 		return out.toString();
 	}
@@ -78,6 +81,8 @@ public class Jeu {
 			Joueur joueurCourant = donnerJoueurSuivant();
 			out.append(joueurCourant.afficherEtatJoueur());
 			out.append(jouerTour(joueurCourant));
+			out.append(donnerClassement());
+			out.append("\n");
 			
 			int km = joueurCourant.donnerKmParcourus();
 			if (km >= 1000) {
@@ -88,7 +93,43 @@ public class Jeu {
 		}
 		
 		out.append("Le sabot est épuisé, la partie est terminée.\n");
+		out.append(donnerClassement());
 		return out.toString();
+	}
+	
+	private String donnerClassement() {
+		List<Joueur> listeJoueursDecroissant = classement();
+		int place = 1;
+		
+		StringBuilder out = new StringBuilder("Le classement des joueurs est : \n");
+		for (Iterator<Joueur> it = listeJoueursDecroissant.iterator(); it.hasNext(); place++) {
+			Joueur joueur = it.next();
+			out.append(place + " - " + joueur + " a parcouru " + joueur.donnerKmParcourus() + "\n");
+		}
+		
+		return out.toString();
+	}
+	
+	private List<Joueur> classement() {
+		NavigableSet<Joueur> joueursClasses =
+			new TreeSet<>(
+				new Comparator<Joueur>() {
+					@Override
+					public int compare(Joueur joueur1, Joueur joueur2) {
+						int compareKm = joueur1.donnerKmParcourus() - joueur2.donnerKmParcourus();
+						if (compareKm == 0) {
+							return joueur1.getNom().compareTo(joueur2.getNom());
+						}
+						
+						return compareKm;
+					}
+				}
+			);
+		joueursClasses.addAll(joueurs);
+		
+		List<Joueur> listeJoueursDecroissant = new ArrayList<>();
+		listeJoueursDecroissant.addAll(joueursClasses.descendingSet());
+		return listeJoueursDecroissant;
 	}
 	
 	public Jeu() {

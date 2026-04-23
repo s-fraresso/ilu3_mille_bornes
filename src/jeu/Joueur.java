@@ -2,18 +2,16 @@ package jeu;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Random;
 import java.util.Set;
 
 import cartes.Botte;
 import cartes.Carte;
 import strategies.Strategie;
 
-public class Joueur {
+public class Joueur implements Comparable<Joueur>{
 	private String nom;
 	private ZoneDeJeu zoneDeJeu;
 	private MainJoueur main = new MainJoueur();
-	private Random random = new Random();
 	private Strategie strategie = new Strategie() {};
 	
 	public Joueur(String nom, ZoneDeJeu zoneDeJeu) {
@@ -145,5 +143,15 @@ public class Joueur {
 	@Override
 	public int hashCode() {
 		return 19 * nom.hashCode();
+	}
+	
+	@Override
+	public int compareTo(Joueur joueurToCompare) {
+		int compareKm = donnerKmParcourus() - joueurToCompare.donnerKmParcourus();
+		if (compareKm == 0) {
+			return nom.compareTo(joueurToCompare.getNom());
+		}
+		
+		return compareKm;
 	}
 }

@@ -7,12 +7,14 @@ import java.util.Set;
 
 import cartes.Botte;
 import cartes.Carte;
+import strategies.Strategie;
 
 public class Joueur {
 	private String nom;
 	private ZoneDeJeu zoneDeJeu;
 	private MainJoueur main = new MainJoueur();
 	private Random random = new Random();
+	private Strategie strategie = new Strategie() {};
 	
 	public Joueur(String nom, ZoneDeJeu zoneDeJeu) {
 		this.nom = nom;
@@ -76,11 +78,10 @@ public class Joueur {
 	public Coup choisirCoup(Set<Joueur> participants) {
 		Set<Coup> coups = coupsPossibles(participants);
 		if (coups.isEmpty()) {
-			coups = coupsDefausse();
+			return strategie.selectionnerDefausse(coupsDefausse());
 		}
-		
-		Coup[] coupsArr = coups.toArray(new Coup[coups.size()]);
-		return coupsArr[random.nextInt(coupsArr.length)];
+
+		return strategie.selectionnerCoup(coups);
 	}
 	
 	public String afficherEtatJoueur() {
@@ -122,6 +123,10 @@ public class Joueur {
 	
 	public ZoneDeJeu getZoneDeJeu() {
 		return zoneDeJeu;
+	}
+	
+	public void setStrategie(Strategie strategie) {
+		this.strategie = strategie;
 	}
 	
 	@Override

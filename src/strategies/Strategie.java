@@ -20,7 +20,7 @@ public interface Strategie {
 						return 0;
 					}
 					
-					return random.nextBoolean() ? 1 :  -1;
+					return random.nextBoolean() ? 1 : -1;
 				}
 			}
 		);
@@ -28,12 +28,12 @@ public interface Strategie {
 		return coupsTries;
 	}
 	
-	public default Coup SelectionnerCoup(Set<Coup> coups) {
+	public default Coup selectionnerCoup(Set<Coup> coups) {
 		NavigableSet<Coup> coupsTries = trierCoups(coups);
 		return coupsTries.getFirst();
 	}
 	
-	public default Coup SelectionnerDefausse(Set<Coup> coups) {
+	public default Coup selectionnerDefausse(Set<Coup> coups) {
 		NavigableSet<Coup> coupsTries = trierCoups(coups);
 		return coupsTries.getLast();
 	}

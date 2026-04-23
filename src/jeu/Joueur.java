@@ -2,8 +2,10 @@ package jeu;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
+import cartes.Bataille;
 import cartes.Botte;
 import cartes.Carte;
 import strategies.Strategie;
@@ -109,6 +111,14 @@ public class Joueur implements Comparable<Joueur>{
 		out.append("\n");
 		
 		return out.toString();
+	}
+	
+	public Carte donnerSommetPile() {
+		List<Bataille> pileBataille = zoneDeJeu.getPileBataille();
+		if (pileBataille.isEmpty()) {
+			return null;
+		}
+		return pileBataille.getFirst();
 	}
 	
 	public String getNom() {

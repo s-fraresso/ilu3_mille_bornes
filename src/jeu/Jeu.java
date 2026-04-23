@@ -76,6 +76,7 @@ public class Jeu {
 		
 		while (!sabot.estVide()) {
 			Joueur joueurCourant = donnerJoueurSuivant();
+			out.append(joueurCourant.afficherEtatJoueur());
 			out.append(jouerTour(joueurCourant));
 			
 			int km = joueurCourant.donnerKmParcourus();

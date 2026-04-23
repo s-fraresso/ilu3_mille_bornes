@@ -106,6 +106,7 @@ public class Joueur {
 				out.append(", ");
 			}
 		}
+		out.append("\nKm parcourus : " + zoneDeJeu.donnerKmParcourus());
 		out.append("\n");
 		
 		return out.toString();
